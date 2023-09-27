@@ -12,14 +12,6 @@ function Home() {
         .then((response) => setItems(response))
     }, [])
 
-    const show = (id) => {
-        document.getElementById(id).classList.add("show")
-        let itemsHolder = document.querySelectorAll("[item-holder]")
-        itemsHolder.forEach(item => {
-            item.classList.add("unshow")
-        })
-    }
-
     return (
         <div className="home-page">
             {items?.map((item, index) => {
@@ -46,7 +38,6 @@ function Home() {
                     </div>
                 )
             })}
-
         </div>
     )
 }
