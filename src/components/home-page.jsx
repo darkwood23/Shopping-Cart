@@ -22,7 +22,6 @@ function Home() {
                                 <img src={item.image} alt="item" className="item-image"/>
                                 <h2 className="item-title">{item.title}</h2>
                                 <h3 className="item-price">${item.price}</h3>
-                                <p className="item-description">{item.description}</p>
                             </div>
                         }
                         modal nested>

@@ -34,6 +34,13 @@ function Item(props) {
         total: Number(props.price) * Number(amount)
     }
 
+    const addCartItem = () => {
+        let cartItems = document.getElementById("cart-items")
+        let newCart = Number(cartItems.textContent)
+        newCart += amount
+        cartItems.textContent = newCart
+    }
+
     return (
         <div className="item-buy" id={props.id}>
             <img src={props.image} alt={props.title} className="item-image"/>
@@ -50,7 +57,7 @@ function Item(props) {
                     <Link to="/shopping-cart" state={data}>
                         <button type="button" className="buy-now buy-buttons">Buy Now</button>
                     </Link>
-                    <button className="add-to-cart buy-buttons" onClick={props.click}>Add to cart</button>
+                    <button className="add-to-cart buy-buttons" onClick={addCartItem}>Add to cart</button>
                 </div>
                 <button className="close-button" onClick={props.click}>Cancel</button>
             </div>

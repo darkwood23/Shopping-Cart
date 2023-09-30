@@ -3,14 +3,21 @@ import { useLocation, Link } from "react-router-dom"
 import "../styles/shopping-cart.css"
 import Popup from "reactjs-popup"
 
-function Shopping(props) {
+function Shopping() {
     const [items, setItems] = useState([])
 
     const location = useLocation()
-    const data = location.state
-    useEffect(() => {
-        setItems((item) => [...item, data])
-    }, [data])
+    if(location.state !== null) {
+        const data = location.state
+        useEffect(() => {
+            setItems((item) => [...item, data])
+        }, [data])
+    }
+
+    const deleteFunc = (delIndex) => {
+        const newItems = items.filter((index) => items[index] === delIndex)
+        setItems(newItems)
+    }
     
     return (
         <div className="shopping-cart">
@@ -31,12 +38,12 @@ function Shopping(props) {
                     {items?.map((product, index) => (
                         <tr key={index}>
                             <td className="sn-normal">{index + 1}</td>
-                            <td className="image-normal"><img src={product.image} alt="" className="table-image"/></td>
-                            <td className="item-normal">{product.item}</td>
-                            <td className="quantity-normal">{product.quantity}</td>
-                            <td className="price-per-normal">${product.pricePer}</td>
-                            <td className="total-normal">${product.total}</td>
-                            <td className="action-normal"><button className="delete-item-button">Delete Item</button></td>
+                            <td className="image-normal"><img src={product?.image} alt="" className="table-image"/></td>
+                            <td className="item-normal">{product?.item}</td>
+                            <td className="quantity-normal">{product?.quantity}</td>
+                            <td className="price-per-normal">${product?.pricePer}</td>
+                            <td className="total-normal">${product?.total}</td>
+                            <td className="action-normal"><button className="delete-item-button" onClick={() => deleteFunc(index)}>Delete Item</button></td>
                         </tr>
                     ))}
                 </tbody>

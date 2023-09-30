@@ -2,6 +2,7 @@ import cart from '../assets/cart.svg'
 import logo from '../assets/shopping-cart-logo.jpeg' 
 import { Link } from 'react-router-dom'
 import '../styles/header.css'
+import cartVariant from '../assets/cart-variant.svg'
 
 function Header() {
     return (
@@ -15,6 +16,10 @@ function Header() {
                         <h3 id='checkout-name' className='small-name'>Checkout</h3>
                     </div>
                 </Link>
+                <div className="cart">
+                    <img src={cartVariant} alt="cart-variant-pic" className='small-logo'/>
+                    <h2 id='cart-items'>0</h2>
+                </div>
             </div>
         </div>
     )
