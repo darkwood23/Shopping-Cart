@@ -12,6 +12,11 @@ function Shopping() {
         useEffect(() => {
             setItems((item) => [...item, data])
         }, [data])
+    } else if (localStorage.getItem("cart-items") !== null) {
+        useEffect(() => {
+            const cartItems = () => JSON.parse(localStorage.getItem("cart-items"))
+            setItems(cartItems)
+        }, [localStorage.getItem("cart-items")])
     }
 
     const deleteFunc = (delIndex) => {
@@ -56,7 +61,7 @@ function Shopping() {
                     close => (
                         <div className="popup">
                             <h1>Thank You For Shopping With Us!</h1>
-                            <Link to="/" onClick={() => close()} style={{textDecoration: 'none', color: 'inherit'}}><p>Go back to home page</p></Link>
+                            <Link to="/" style={{textDecoration: 'none', color: 'inherit'}} ><p>Go back to home page</p></Link>
                         </div>
                     )
                 }

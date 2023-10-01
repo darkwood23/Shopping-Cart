@@ -18,7 +18,6 @@
 }
 
 .item-holder:hover {
-    transform: scale(1.02);
     box-shadow: 6px 6px 4px black;
     cursor: pointer;
 }

@@ -3,7 +3,7 @@ import plus from "../assets/plus.svg"
 
 import "../styles/home-page.css"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
 function Item(props) {
@@ -39,6 +39,31 @@ function Item(props) {
         let newCart = Number(cartItems.textContent)
         newCart += amount
         cartItems.textContent = newCart
+
+        if(localStorage.getItem("cart-items") === null) {
+            localStorage.setItem("cart-items", JSON.stringify([
+                    {
+                        image: props.image,
+                        item: props.title,
+                        pricePer: props.price,
+                        quantity: amount,
+                        total: Number(amount) * Number(props.price)
+                    }
+                ])
+            )
+        } else {
+            let items = JSON.parse(localStorage.getItem("cart-items"))
+            items.push(
+                {
+                    image: props.image,
+                    item: props.title,
+                    pricePer: props.price,
+                    quantity: amount,
+                    total: Number(amount) * Number(props.price)
+                }
+            )
+            localStorage.setItem("cart-items", JSON.stringify(items))
+        }
     }
 
     return (
