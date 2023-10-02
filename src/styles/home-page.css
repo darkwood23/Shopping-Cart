@@ -17,6 +17,10 @@
     box-shadow: 4px 4px 2px rgba(0, 0, 0, 0.254);
 }
 
+.all-elements:nth-child(5) img {
+    width: 150px;
+}
+
 .item-holder:hover {
     box-shadow: 6px 6px 4px black;
     cursor: pointer;

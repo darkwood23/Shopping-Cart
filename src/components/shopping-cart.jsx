@@ -5,6 +5,7 @@ import Popup from "reactjs-popup"
 
 function Shopping() {
     const [items, setItems] = useState([])
+    const [disabled, setDisabled] = useState()
 
     const location = useLocation()
     if(location.state !== null) {
@@ -20,10 +21,30 @@ function Shopping() {
     }
 
     const deleteFunc = (delIndex) => {
-        const newItems = items.filter((index) => items[index] === delIndex)
-        setItems(newItems)
+        let array = [...items]
+        if (delIndex !== -1) {
+            array.splice(delIndex, 1)
+            setItems(array)
+        }
+        
+        const cartItems = JSON.parse(localStorage.getItem("cart-items"))
+        cartItems.splice(delIndex, 1)
+        localStorage.setItem("cart-items", JSON.stringify(cartItems))
     }
-    
+
+    useEffect(() => {
+        if(items.length === 0) {
+            setDisabled(true)
+        } else {
+            setDisabled(false)
+        }
+    }, [items.length === 0])
+
+    const deleteStorage = () => {
+        localStorage.clear()
+        
+    }
+
     return (
         <div className="shopping-cart">
             <h1 className="head">Checkout</h1>
@@ -54,14 +75,14 @@ function Shopping() {
                 </tbody>
             </table>
             <Popup trigger={
-                <button className="checkout-btn">Checkout</button>
+                <button className="checkout-btn" id="checkout-button" disabled={disabled} onClick={deleteStorage}>Checkout</button>
             }
             modal nested>
                 {
                     close => (
                         <div className="popup">
                             <h1>Thank You For Shopping With Us!</h1>
-                            <Link to="/" style={{textDecoration: 'none', color: 'inherit'}} ><p>Go back to home page</p></Link>
+                            <Link to="/" style={{textDecoration: 'none', color: 'inherit'}} ><p onClick={deleteStorage}>Go back to home page</p></Link>
                         </div>
                     )
                 }
