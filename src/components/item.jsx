@@ -27,7 +27,7 @@ function Item(props) {
 
     const data = {
         image: props.image,
-        title: props.title,
+        item: props.title,
         price: props.price,
         quantity: amount,
         pricePer: props.price,
@@ -35,11 +35,6 @@ function Item(props) {
     }
 
     const addCartItem = () => {
-        let cartItems = document.getElementById("cart-items")
-        let newCart = Number(cartItems.textContent)
-        newCart += amount
-        cartItems.textContent = newCart
-
         if(localStorage.getItem("cart-items") === null) {
             localStorage.setItem("cart-items", JSON.stringify([
                     {

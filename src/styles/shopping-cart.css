@@ -126,3 +126,8 @@ tbody td:nth-child(7) {
     color: black;
     cursor:auto;
 }
+
+.total-price {
+    display: flex;
+    gap: 1rem;
+}

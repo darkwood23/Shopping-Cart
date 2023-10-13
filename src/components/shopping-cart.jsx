@@ -6,6 +6,7 @@ import Popup from "reactjs-popup"
 function Shopping() {
     const [items, setItems] = useState([])
     const [disabled, setDisabled] = useState()
+    const [totalPrice, setTotalPrice] = useState(0)
 
     const location = useLocation()
     if(location.state !== null) {
@@ -19,6 +20,15 @@ function Shopping() {
             setItems(cartItems)
         }, [localStorage.getItem("cart-items")])
     }
+
+    useEffect(() => {
+        let total = 0
+        items?.map((item) => {
+            total += Number(item.total)
+        })
+        setTotalPrice(total)
+    }, [items])
+
 
     const deleteFunc = (delIndex) => {
         let array = [...items]
@@ -74,6 +84,10 @@ function Shopping() {
                     ))}
                 </tbody>
             </table>
+            <div className="total-price">
+                <h2>Total Price:</h2>
+                <h2>{totalPrice}</h2>
+            </div>
             <Popup trigger={
                 <button className="checkout-btn" id="checkout-button" disabled={disabled} onClick={deleteStorage}>Checkout</button>
             }

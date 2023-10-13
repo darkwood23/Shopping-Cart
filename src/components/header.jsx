@@ -3,8 +3,16 @@ import logo from '../assets/shopping-cart-logo.jpeg'
 import { Link } from 'react-router-dom'
 import '../styles/header.css'
 import cartVariant from '../assets/cart-variant.svg'
+import { useEffect, useState } from 'react'
 
 function Header() {
+    const [cartItems, setCartItems] = useState([])
+
+    useEffect(() => {
+        let storage = JSON.parse(localStorage.getItem('cart-items'))
+        setCartItems(storage.length)
+    }, [])
+
     return (
         <div className="header-element-holder">
             <div className="logo-holder">
@@ -18,7 +26,7 @@ function Header() {
                 </Link>
                 <div className="cart">
                     <img src={cartVariant} alt="cart-variant-pic" className='small-logo'/>
-                    <h2 id='cart-items'>0</h2>
+                    <h2 id='cart-items'>{cartItems}</h2>
                 </div>
             </div>
         </div>
